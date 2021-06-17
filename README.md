@@ -64,6 +64,7 @@ BdI engine is stronger in memory and user dashboard for testing, Trevas is stron
 Idea: Spark can run locally in memory as well
 
 ### Known related repos
-* Trevas engine done by INSEE: https://github.com/InseeFr/Trevas
+* Trevas Java engine done by INSEE: https://github.com/InseeFr/Trevas
+* Trevas JS JavaScript engine done by INSEE: https://github.com/InseeFr/Trevas-JS
 * Banca d'Italia SDMX Connectors: https://github.com/amattioc/SDMX
 * Meaningful Data open source library for SDMX available in PyPi and on https://github.com/Meaningful-Data/sdmxthon 
