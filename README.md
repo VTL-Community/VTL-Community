@@ -19,11 +19,9 @@ The general objectives are interoperability and promotion of the VTL tools devel
 The following specific subjects have already been identified:
 
 * design a standard REST API for VTL engines
-
 * document the interoperability mechanism based on an abstract engine
-
+* specify mechanisms for acessing and understanding external data (e.g. CSV files)
 * develop a test common framework, or even a conformance benchmark
-
 * create communication material (guides, success stories, business cases) for the promotion of VTL tools
 
 ### Open discussion points
