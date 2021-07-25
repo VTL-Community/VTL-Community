@@ -1,6 +1,6 @@
 # Questions and Answers
 
-In this section, VTL users exchange questions and answers on the language and how to use it.
+In this section, VTL users can exchange questions and answers about the language and how to use it, and provide additional examples.
 
 ## General
 
@@ -10,6 +10,6 @@ General questions.
 
 Questions about the EBNF grammar.
 
-### Operators
+## Operators
 
 Questions about the operators.
