@@ -39,19 +39,20 @@ The following specific subjects have already been identified:
 #### Governance: (linked to the above)
 * Gap: current SDMX TWG TF is not very active and responsive for VTL fixes and enhancements
 * INSEE: approach of "active metadata" for business users - we can elaborate in the next meeting
+* Github: create Github organisation VTL-Community and move repo there
+  --> add folder for files such as presentations, training material... as long as it is not commercial
 
-#### Issues on structural metadata:
-What to do when the data files do not have structural information? E.g. a CSV file does not tell to VTL which columns are dimensions, attributes, measures.
+Discussed in meeting 07/09/2021:
+* Official SDMX VTL-TF is responsilbe for official VTL releases and documentation
+* This community can gather interested developers, users, and experts to share experice and code, discuss issues and change request and communicate to the VTL-TF
+* we should find a slot for a regular community meeting --> first Tuesday of the month 3pm-5pm central European time
+  --> next meeting 5th Oct: wrap-up of communication during SDMX global conf
+  --> presentation of Antonio or work done by his company 
+* information about the community will be shared through the SDMX global conference (Antonio, Katrin)
 
-_Hadrien:_ assumption in their implementation is that every column is a measure. Once you use a group-by, the concepts in the group-by clause are treated as identifiers
-
-* Option 1: create SDMX DSD to cover the files, the connector is ready and standardised
-* Option 2: use another metadata standard (DPM? DDI?) and write a connector for VTL
-* Option 3: lightweight way to define VTL data models --> e.g. separate metadata JSON or CSV file with column name/number and D/A/M to give strcutre to the VTL scripts
-  * SSB and ECB each have a JSON strcuture to define metadata. We can agree on a target structure spec as a future VTL-native alternative to SDMX for cases where SDMX is not available 
-  * Issue: data type defintions, e.g. date string patterns. VTL differs from XML and Java and probably we should use VTL syntax
-  * __Action:__ draft a JSON structure based on the two existing:
-  https://github.com/FranckCo/VTL-Community/issues/1
+#### Issue management:
+* We can encourage users and developers to post issues on the community issues tab
+* Once issues are discussed and closed, we can add solutions and example to the Q&A page
 
 #### Testing: there is an issue on creating data within VTL for testing
 Could we work on a test suite?
