@@ -66,5 +66,5 @@ Idea: Spark can run locally in memory as well
 * Trevas Java engine done by INSEE: https://github.com/InseeFr/Trevas
 * Trevas JS JavaScript engine done by INSEE: https://github.com/InseeFr/Trevas-JS
 * ISTAT OSS VTL Framework https://github.com/VTLFrameworkDevelopment/VTLFramework
-* Banca d'Italia SDMX Connectors: https://github.com/amattioc/SDMX
+* Banca d'Italia VTL Engine & Editor: https://github.com/vpinna80/VTL 
 * Meaningful Data open source library for SDMX available in PyPi and on https://github.com/Meaningful-Data/sdmxthon 
