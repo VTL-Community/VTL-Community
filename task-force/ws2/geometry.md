@@ -25,14 +25,14 @@ Proposal:
 #### Geometric type "constructors"
 
 At this point, VTL does not contains constructors (ie new Object(...)).
-User are able to instanciate directly a string (`s := "string"`) but not a Date. To do so, user needs to invoke `calc` operator (`d := cast("2023-09-19", date, "YYYY-mm-dd")`).
+Users are able to instanciate directly a string (`s := "string"`) but not a Date. To do so, users need to invoke `calc` operator (`d := cast("2023-09-19", date, "YYYY-mm-dd")`).
 
 To make the `calc` signature consistent, we can consider these new possibilities:
 
-- Cast `point` in `string`: `s := cast(myPoint, string, mask)` where mask is the string output format (can be `wkt` or `geojson`)
-- Cast `string` in `point`: `s := cast("POINT(10 10)", point, mask)` where mask is the string input format (can be `wkt` or `geojson`, `wkt` in this example)
-- Cast `polygon` in `string`: `s := cast(myPolygon, string, mask)` where mask is the string output format (can be `wkt` or `geojson`)
-- Cast `string` in `polygon`: `s := cast("POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))", polygon, mask)` where mask is the string input format (can be `wkt` or `geojson`, `wkt` in this example)
+- Cast `point` to `string`: `s := cast(myPoint, string, mask)` where mask is the string output format (can be `wkt` or `geojson`)
+- Cast `string` to `point`: `s := cast("POINT(10 10)", point, mask)` where mask is the string input format (can be `wkt` or `geojson`, `wkt` in this example)
+- Cast `polygon` to `string`: `s := cast(myPolygon, string, mask)` where mask is the string output format (can be `wkt` or `geojson`)
+- Cast `string` to `polygon`: `s := cast("POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))", polygon, mask)` where mask is the string input format (can be `wkt` or `geojson`, `wkt` in this example)
 
 #### Define geometric operators
 
