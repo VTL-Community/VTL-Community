@@ -104,18 +104,18 @@ result := cross_join(cities, nuts3 filter geo_includes(xy, contour));
 
 ### 09/22/23 - Meeting notes (NL - VP - JS - FV)
 
-- Q: `point` & `polygon`: are they basic scalar types? Or atomic pieces?
+- Q: `point` & `polygon`: are they basic scalar types? Or atomic elements?
 
-A: They don't seem to be more complex than `time_period`, they are serializable as string and castable to typed objects, so they possibly be considered as basic scalar types.
+A: They don't seem to be more complex than `time_period`, they are serializable as strings and castable to typed objects, so they can possibly be considered as basic scalar types.
 
-- Q: `point` & `polygon`: do we need constructor? To instanciate point with integers directly instead of concat & cast
+- Q: `point` & `polygon`: do we need constructors? To instanciate `point` with integers directly (`new Point(10, 10)`) instead of concat & cast.
 
-A: They are many options to declare a point, 2D, 3D, 3D + measure,...
-It seems to be more complicated than an improvment. Casting a valid built string seems to be simplest.
+A: They are many options to declare a point, 2D, 3D, 3D + measure...
+It seems to be more an added complexity than an improvement. Casting a valid string seems to be simplest.
 
-Considering the `cities` input dataset (see above), containing simply x & y as string, we could also handle more practice datasets like:
+Considering the `cities` input dataset (see above), containing simply x & y as strings, we could also handle more practical datasets like:
 
-- Component containing wkt string
+- Component containing wkt strings
 
 |     id     |       xy        |
 | :--------: | :-------------: |
@@ -132,7 +132,7 @@ With the following upstream script:
 cities := cities[calc xy := cast(xy, point, "wkt")];
 ```
 
-- Component containing geojson string
+- Component containing geojson strings
 
 <table>
 <tr>
