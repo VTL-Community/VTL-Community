@@ -83,11 +83,13 @@ cities := cities[calc xyStr := "POINT(" || x || " " || y || ")"]
 `VTL script`:
 
 ```
+
 // how to obtain result as a city table where cities are contained in areas?
 // define dedicated operator?
 result := geo_includes(cities, nuts3 using xy, contour)
 // or simply cross_join using the filter clause
 result := cross_join(cities, nuts3 filter geo_includes(xy, contour));
+
 ```
 
 `result`:
@@ -101,3 +103,117 @@ result := cross_join(cities, nuts3 filter geo_includes(xy, contour));
 |    "D"     |  POINT(21 21)  |    1    | POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10)) |
 
 ### 09/22/23 - Meeting notes (NL - VP - JS - FV)
+
+- Q: `point` & `polygon`: are they basic scalar types? Or atomic pieces?
+
+A: They don't seem to be more complex than `time_period`, they are serializable as string and castable to typed objects, so they possibly be considered as basic scalar types.
+
+- Q: `point` & `polygon`: do we need constructor? To instanciate point with integers directly instead of concat & cast
+
+A: They are many options to declare a point, 2D, 3D, 3D + measure,...
+It seems to be more complicated than an improvment. Casting a valid built string seems to be simplest.
+
+Considering the `cities` input dataset (see above), containing simply x & y as string, we could also handle more practice datasets like:
+
+- Component containing wkt string
+
+|     id     |       xy        |
+| :--------: | :-------------: |
+|   string   |     string      |
+| identifier |     measure     |
+|    "A"     | POINT(0.2 0.2)  |
+|    "B"     |  POINT(20 20)   |
+|    "C"     | POINT(100 -100) |
+|    "D"     |  POINT(21 21)   |
+
+With the following upstream script:
+
+```
+cities := cities[calc xy := cast(xy, point, "wkt")];
+```
+
+- Component containing geojson string
+
+<table>
+<tr>
+<td> id </td> <td> xy </td>
+</tr>
+<tr><td>string</td><td>string</td></tr>
+<tr><td>identifier</td><td>measure</td></tr>
+<tr>
+<td>"A"</td>
+<td>
+
+```json
+{
+	"type": "Feature",
+	"geometry": {
+		"type": "Point",
+		"coordinates": [0.2, 0.2]
+	},
+	"properties": {}
+}
+```
+
+</td>
+</tr>
+<tr>
+<td>"B"</td>
+<td>
+
+```json
+{
+	"type": "Feature",
+	"geometry": {
+		"type": "Point",
+		"coordinates": [20, 20]
+	},
+	"properties": {}
+}
+```
+
+</td>
+</tr>
+<tr>
+<td>"C"</td>
+<td>
+
+```json
+{
+	"type": "Feature",
+	"geometry": {
+		"type": "Point",
+		"coordinates": [100, -100]
+	},
+	"properties": {}
+}
+```
+
+</td>
+</tr>
+<tr>
+<td>"D"</td>
+<td>
+
+```json
+{
+	"type": "Feature",
+	"geometry": {
+		"type": "Point",
+		"coordinates": [21, 21]
+	},
+	"properties": {}
+}
+```
+
+</td>
+</tr>
+</table>
+
+With the following upstream script:
+
+```
+cities := cities[calc xy := cast(xy, point, "geojson")];
+```
+
+These 3 input datasets and their upstream scripts give the same `cities` datasets, ready to be handled thanks to geo operators.
