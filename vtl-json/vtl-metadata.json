@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sdmx.org/resources/VTL/schemas/v2_0/metadata",
+  "title": "VTL metadata repository",
+  "description": "The description of metadata consumed by the VTL transformation scheme",
+  "type": "object",
+  "properties": {
+    "datasets": {
+      "description": "List of the datasets used in the transformation scheme",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "The name of the dataset",
+            "type": "string"
+          },
+          "DataStructure": {
+            "description": "The structure definition of the dataset as a list of components",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "description": "The name of the component",
+                  "type": "string"
+                },
+                "role": {
+                  "description": "The role of the component",
+                  "enum": ["identifier", "measure", "attribute", "viral attribute"]
+                },
+                "type": {
+                  "description": "The value domain subset of the component",
+                  "type": "string"
+                },
+                "nullable": {
+                  "description": "Whether the subset includes the null value or not",
+                  "type": "boolean"
+                }
+              },
+              "required": [ "name", "role", "type" ],
+              "if": {
+                "properties": {
+                  "role": {
+                    "const": "identifier"
+                  }
+                },
+                "required": [ "nullable" ]
+              },
+              "then": {
+                "properties": {
+                  "nullable": {
+                    "const": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "required": [ "name", "DataStructure" ]
+      }
+    },
+    "domains": {
+      "description": "List of the value domain subsets consumed by the VTL transformation scheme",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "The name of the value domain subset",
+            "type": "string"
+          },
+          "type": {
+            "description": "The parent value domain subset name",
+            "type": "string"
+          },
+          "setlist": {
+            "description": "If this domain subset is a codelist, the set of codes",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [ "name", "type", "setlist" ]
+      }
+    }
+  },
+  "required": [ "datasets", "domains" ]
+}
