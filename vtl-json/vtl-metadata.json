@@ -5,60 +5,11 @@
   "description": "The description of metadata consumed by the VTL transformation scheme",
   "type": "object",
   "properties": {
-    "datasets": {
-      "description": "List of the datasets used in the transformation scheme",
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "The name of the dataset",
-            "type": "string"
-          },
-          "DataStructure": {
-            "description": "The structure definition of the dataset as a list of components",
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "description": "The name of the component",
-                  "type": "string"
-                },
-                "role": {
-                  "description": "The role of the component",
-                  "enum": ["identifier", "measure", "attribute", "viral attribute"]
-                },
-                "type": {
-                  "description": "The value domain subset of the component",
-                  "type": "string"
-                },
-                "nullable": {
-                  "description": "Whether the subset includes the null value or not",
-                  "type": "boolean"
-                }
-              },
-              "required": [ "name", "role", "type" ],
-              "if": {
-                "properties": {
-                  "role": {
-                    "const": "identifier"
-                  }
-                },
-                "required": [ "nullable" ]
-              },
-              "then": {
-                "properties": {
-                  "nullable": {
-                    "const": false
-                  }
-                }
-              }
-            }
-          }
-        },
-        "required": [ "name", "DataStructure" ]
-      }
+    "input_datasets": {
+      "$ref": "#/dataset"
+    },
+    "output_datasets": {
+      "$ref": "#/dataset"
     },
     "domains": {
       "description": "List of the value domain subsets consumed by the VTL transformation scheme",
@@ -83,9 +34,90 @@
             }
           }
         },
-        "required": [ "name", "type", "setlist" ]
+        "required": [
+          "name",
+          "type",
+          "setlist"
+        ]
       }
     }
   },
-  "required": [ "datasets", "domains" ]
+  "required": [
+    "input_datasets",
+    "domains"
+  ],
+  "$defs": {
+    "dataset": {
+      "$id": "/dataset",
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "description": "List of the datasets used in the transformation scheme",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "The name of the dataset",
+            "type": "string"
+          },
+          "DataStructure": {
+            "description": "The structure definition of the dataset as a list of components",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "description": "The name of the component",
+                  "type": "string"
+                },
+                "role": {
+                  "description": "The role of the component",
+                  "enum": [
+                    "identifier",
+                    "measure",
+                    "attribute",
+                    "viral attribute"
+                  ]
+                },
+                "type": {
+                  "description": "The value domain subset of the component",
+                  "type": "string"
+                },
+                "nullable": {
+                  "description": "Whether the subset includes the null value or not",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "name",
+                "role",
+                "type",
+                "nullable"
+              ],
+              "if": {
+                "properties": {
+                  "role": {
+                    "const": "identifier"
+                  }
+                },
+                "required": [
+                  "nullable"
+                ]
+              },
+              "then": {
+                "properties": {
+                  "nullable": {
+                    "const": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "name",
+          "DataStructure"
+        ]
+      }
+    }
+  }
 }
